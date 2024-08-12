@@ -37,6 +37,7 @@ export default function MainSlider({ data, genres }) {
                       className=" rounded-2xl w-full h-fit"
                       src={src + e.backdrop_path}
                     />
+                    <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black  to-transparent rounded-2xl"></div>
                     <div className="absolute bottom-4 left-16 ">
                       <Link href={`/${e.id}`}>
                         <h1 className="text-white text-4xl font-bold font-mono backdrop-blur-[1.2px] px-3 py-2 rounded-xl">
@@ -56,13 +57,13 @@ export default function MainSlider({ data, genres }) {
                         )}
                       </ul>
                       <div className="mt-4 ml-2 flex">
-                      <Link href={`/${e.id}#videos`} scroll={true}>
-                        <Button
-                          className="bg-[#d22f27] hover:bg-[#d23027e6] rounded-xl"
-                          variant="destructive"
-                        >
-                          Watch Trailer
-                        </Button>
+                        <Link href={`/${e.id}#videos`} scroll={true}>
+                          <Button
+                            className="bg-[#d22f27] hover:bg-[#d23027e6] rounded-xl"
+                            variant="destructive"
+                          >
+                            Watch Trailer
+                          </Button>
                         </Link>
                         <Button className="bg-[#898996a8] hover:bg-[#89899682]    rounded-xl ml-2 flex justify-center items-center">
                           <span>+</span>
