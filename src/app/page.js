@@ -3,6 +3,7 @@ import {
   nowPlayingMovies,
   popularMovies,
   topRatedMovies,
+  SearchQuery
 } from "@/API/mainApi";
 import Card from "@/components/Card/Card";
 import Main from "@/components/Main/Main";
@@ -12,6 +13,27 @@ import Image from "next/image";
 
 export default async function Home({ searchParams }) {
   const page = searchParams.page ? searchParams.page : 1;
+  const search = searchParams.search;
+
+  if (search) {
+    const searchMovies = await SearchQuery(search, page);
+    return (
+      <div>
+        <div className="flex">
+          <Sidebar />
+          <div className="ml-72 mt-10 grid grid-cols-2 w-6/12 gap-y-5 gap-2 ">
+            {searchMovies.results.map((movie) => {
+              return <Card key={movie.id} movie={movie} />;
+            })}
+          </div>
+        </div>
+        <div className="text-center my-10 mr-16">
+          <PaginationComponent length={searchMovies.total_pages} page={page} search={search} />
+        </div>
+      </div>
+    );
+  }
+
 
   const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

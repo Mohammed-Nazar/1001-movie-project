@@ -4,7 +4,7 @@ const DetiailsHero = ({details, src}) => {
   return (
     <div className="relative shadow-inner">
         <img className="rounded-xl" src={src + details.backdrop_path} />
-        <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black  to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black  to-transparent rounded-xl"></div>
         <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center w-full">
           <h1 className="text-3xl font-bold font-serif w-full">
             {details.title}
