@@ -6,7 +6,7 @@ import {
 } from "@/API/mainApi";
 import Card from "@/components/Card/Card";
 import Main from "@/components/Main/Main";
-import PaginationComponent from "@/components/pagination/pagination";
+import PaginationComponent from "../components/pagination/Pagination.jsx";
 import Sidebar from "@/components/Sidebar";
 import Image from "next/image";
 
