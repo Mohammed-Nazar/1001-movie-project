@@ -4,12 +4,12 @@ import Link from "next/link";
 
 const Sidebar = () => {
   return (
-    <aside className="pt-10 ml-14  border-r-[0.1px] border-r-[#898996] w-[15%] h-screen">
+    <aside className="fixed bottom-0 top-0 pt-10 ml-14  border-r-[0.1px] border-r-[#898996] w-[15%] ">
       <Link href={`/`}>
         <div className=" font-extrabold font-serif flex">
           <Image src="logo.svg" alt="logo" width={20} height={20} />
           <h1 className="ml-2 text-xl">
-            Exxmon<span className="text-[#d22f27]">.</span>
+            MMoon<span className="text-[#d22f27]">.</span><span className="text-xs">tv</span>
           </h1>
         </div>
       </Link>
@@ -229,7 +229,6 @@ const Sidebar = () => {
               height="20px"
               className="inline mb-1 mr-2"
               viewBox="0 0 1024 1024"
-              class="icon"
               version="1.1"
             >
               <path
