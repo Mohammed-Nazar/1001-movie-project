@@ -18,6 +18,9 @@ export default function PaginationComponent({ length, page , search }) {
           <PaginationPrevious href={`${path}${page > 1 ? page - 1 : page}`} />
         </PaginationItem>
         <PaginationItem>
+          {page > 1 && <PaginationLink href={`${path}${page-1}`}>{page - 2}</PaginationLink>}
+        </PaginationItem>
+        <PaginationItem>
           {page > 1 && <PaginationLink href={`${path}${page-1}`}>{page - 1}</PaginationLink>}
         </PaginationItem>
         <PaginationItem>

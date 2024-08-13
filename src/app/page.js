@@ -3,7 +3,8 @@ import {
   nowPlayingMovies,
   popularMovies,
   topRatedMovies,
-  SearchQuery
+  SearchQuery,
+  upComingMovies,
 } from "@/API/mainApi";
 import Card from "@/components/Card/Card";
 import Main from "@/components/Main/Main";
@@ -13,37 +14,20 @@ import Image from "next/image";
 
 export default async function Home({ searchParams }) {
   const page = searchParams.page ? searchParams.page : 1;
-  const search = searchParams.search;
-
-  if (search) {
-    const searchMovies = await SearchQuery(search, page);
-    return (
-      <div>
-        <div className="flex">
-          <Sidebar />
-          <div className="ml-72 mt-10 grid grid-cols-2 w-6/12 gap-y-5 gap-2 ">
-            {searchMovies.results.map((movie) => {
-              return <Card key={movie.id} movie={movie} />;
-            })}
-          </div>
-        </div>
-        <div className="text-center my-10 mr-16">
-          <PaginationComponent length={searchMovies.total_pages} page={page} search={search} />
-        </div>
-      </div>
-    );
-  }
 
 
-  const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const array = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
   let popularMoviesData = await popularMovies(1);
   let topRatedMoviesData = await topRatedMovies(1);
+  let upComingMoviesData = await upComingMovies(1);
   for (let i = 0; i < array.length; i++) {
     const popularMoviesData2 = await popularMovies(array[i]);
     const topRatedMoviesData2 = await topRatedMovies(array[i]);
+    const  upComingMoviesData2 = await upComingMovies(array[i]);
     popularMoviesData.results.push(...popularMoviesData2.results);
     topRatedMoviesData.results.push(...topRatedMoviesData2.results);
+    upComingMoviesData.results.push(...upComingMoviesData2.results);
   }
   const data = await nowPlayingMovies(1);
 
@@ -53,13 +37,16 @@ export default async function Home({ searchParams }) {
 
   const pagination = (page) => {
     const skip = (page - 1) * 10;
+    upComingMoviesData.results.map((movie) => {
+      movies.push(movie);
+    });
     popularMoviesData.results.map((movie) => {
       movies.push(movie);
     });
-    data.results.map((movie) => {
+    topRatedMoviesData.results.map((movie) => {
       movies.push(movie);
     });
-    topRatedMoviesData.results.map((movie) => {
+    data.results.map((movie) => {
       movies.push(movie);
     });
     movies = movies.slice(skip, skip + 10);
