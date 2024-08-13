@@ -3,77 +3,61 @@ import {
   nowPlayingMovies,
   popularMovies,
   topRatedMovies,
-  SearchQuery,
   upComingMovies,
 } from "@/API/mainApi";
 import Card from "@/components/Card/Card";
 import Main from "@/components/Main/Main";
 import PaginationComponent from "../components/pagination/Pagination.jsx";
-import Sidebar from "@/components/Sidebar";
-import Image from "next/image";
 
 export default async function Home({ searchParams }) {
-  const page = searchParams.page ? searchParams.page : 1;
+  const page = searchParams.page ? parseInt(searchParams.page) : 1;
 
+  const pagesToFetch = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-  const array = [ 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+  // Fetch movie data in parallel
+  const [popularMoviesData, topRatedMoviesData, upComingMoviesData, nowPlayingMoviesData, genres] = await Promise.all([
+    Promise.all(pagesToFetch.map((pageNum) => popularMovies(pageNum))),
+    Promise.all(pagesToFetch.map((pageNum) => topRatedMovies(pageNum))),
+    Promise.all(pagesToFetch.map((pageNum) => upComingMovies(pageNum))),
+    nowPlayingMovies(1),
+    genresList(),
+  ]);
 
-  let popularMoviesData = await popularMovies(1);
-  let topRatedMoviesData = await topRatedMovies(1);
-  let upComingMoviesData = await upComingMovies(1);
-  for (let i = 0; i < array.length; i++) {
-    const popularMoviesData2 = await popularMovies(array[i]);
-    const topRatedMoviesData2 = await topRatedMovies(array[i]);
-    const  upComingMoviesData2 = await upComingMovies(array[i]);
-    popularMoviesData.results.push(...popularMoviesData2.results);
-    topRatedMoviesData.results.push(...topRatedMoviesData2.results);
-    upComingMoviesData.results.push(...upComingMoviesData2.results);
-  }
-  const data = await nowPlayingMovies(1);
+  // Combine the results from all pages
+  const allPopularMovies = popularMoviesData.flatMap(data => data.results);
+  const allTopRatedMovies = topRatedMoviesData.flatMap(data => data.results);
+  const allUpComingMovies = upComingMoviesData.flatMap(data => data.results);
+  const nowPlayingMoviesResults = nowPlayingMoviesData.results;
 
-  const genres = await genresList();
+  // Combine all movie data
+  let allMovies = [
+    ...allUpComingMovies,
+    ...allPopularMovies,
+    ...allTopRatedMovies,
+    ...nowPlayingMoviesResults,
+  ];
 
-  let movies = [];
+  // Pagination logic
+  const moviesPerPage = 10;
+  const totalMovies = allMovies.length;
+  const totalPages = Math.ceil(totalMovies / moviesPerPage);
 
-  const pagination = (page) => {
-    const skip = (page - 1) * 10;
-    upComingMoviesData.results.map((movie) => {
-      movies.push(movie);
-    });
-    popularMoviesData.results.map((movie) => {
-      movies.push(movie);
-    });
-    topRatedMoviesData.results.map((movie) => {
-      movies.push(movie);
-    });
-    data.results.map((movie) => {
-      movies.push(movie);
-    });
-    movies = movies.slice(skip, skip + 10);
-  };
-  pagination(page);
-  const length = Math.ceil(
-    (topRatedMoviesData.results.length +
-      data.results.length +
-      popularMoviesData.results.length) /
-      10
-  );
+  const paginatedMovies = allMovies.slice((page - 1) * moviesPerPage, page * moviesPerPage);
 
   return (
     <div className="flex flex-col justify-center">
-      <Main data={data} genres={genres} />
-      <div className="ml-[23%] mt-[22%] grid grid-cols-4 w-6/12 gap-y-5 gap-2 ">
-        {movies.map((movie) => {
-          return <Card key={movie.id} movie={movie} genres={genres} />;
-        })}
+      <Main data={nowPlayingMoviesData} genres={genres} />
+      <div className="mt-5 relative grid grid-cols-3 gap-y-5 place-items-center">
+        {paginatedMovies.map((movie) => (
+          <Card key={movie.id} movie={movie} genres={genres} />
+        ))}
       </div>
-      
-      <div className="text-center my-10 mr-16">
-        {
-          page <= length ? 
-          <PaginationComponent length={length} page={page} />
-          : <div>404 Content not availbe</div>
-        }
+      <div className="text-center my-10 flex shrink-1 text-sm">
+        {page <= totalPages ? (
+          <PaginationComponent length={totalPages} page={page} className="max-w-24 flex" />
+        ) : (
+          <div>404 Content not available</div>
+        )}
       </div>
     </div>
   );

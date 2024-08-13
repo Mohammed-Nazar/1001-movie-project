@@ -22,7 +22,7 @@ export default function MainSlider({ data, genres }) {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className=" max-h-[9rem] "
+      className=" min-w-9/12 relative"
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -31,7 +31,7 @@ export default function MainSlider({ data, genres }) {
           <CarouselItem key={index}>
             <div className="p-1 relative">
               <Card>
-                <CardContent className=" rounded-lg flex p-0 items-center justify-center">
+                <CardContent className="relative rounded-lg flex p-0 items-center justify-center">
                   <div className="w-full relative h-">
                     <img
                       className=" rounded-2xl  h-fit object-cover"
@@ -76,9 +76,10 @@ export default function MainSlider({ data, genres }) {
             </div>
           </CarouselItem>
         ))}
+        
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="absolute top-36 right-4" />
+        <CarouselNext className="absolute top-36 right-4" />
     </Carousel>
   );
 }

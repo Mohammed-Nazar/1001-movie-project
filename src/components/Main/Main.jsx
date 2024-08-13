@@ -3,10 +3,8 @@ import MainSlider from './components/MainSlider'
 
 const Main = ({data, genres}) => {
   return (
-    <div className='pt-10 mx-10 w-6/12 ml-[20%] mt-2'>
-    <div className='relative w-[100%] mx-8 '>
+    <div className='relative w-full mt-10 min-h-full'>
         <MainSlider data={data} genres={genres}/>
-    </div>
     </div>
   )
 }

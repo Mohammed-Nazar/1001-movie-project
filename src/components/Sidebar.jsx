@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 
 const Sidebar = () => {
   const pathname = usePathname()
-  const style = pathname === "/" ? "border-[#d22f27] border-r" : "";
+  const style = pathname === "/" ? "border-[#d22f27] border-r-2" : "";
   const fill = pathname === "/" ? "#d22f27" : "#898996";
   return (
     <aside className="fixed bottom-0 top-0 pt-10 ml-14  border-r-[0.1px] border-r-[#898996] w-[15%] ">
@@ -22,7 +22,7 @@ const Sidebar = () => {
         <h6 className=" text-base font-bold">MENU</h6>
         <ul className="mt-5">
           <Link href={`/`}>
-            <li className={`text-base font-normal my-3  ${style}`}>
+            <li className={`text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500 ${style}`}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="20px"
@@ -55,7 +55,7 @@ const Sidebar = () => {
               Home
             </li>
           </Link>
-          <li className="text-base font-normal my-3">
+          <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="#898996"
@@ -105,7 +105,7 @@ const Sidebar = () => {
             </svg>
             Genres
           </li>
-          <li className="text-base font-normal my-3">
+          <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20px"
@@ -170,7 +170,7 @@ const Sidebar = () => {
         <h6 className=" text-base font-bold">SOCIAL</h6>
         <ul className="mt-5">
           <Link href={`/`}>
-            <li className="text-base font-normal my-3">
+            <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="#898996"
@@ -187,7 +187,7 @@ const Sidebar = () => {
               Friends
             </li>
           </Link>
-          <li className="text-base font-normal my-3">
+          <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16px"
@@ -227,7 +227,7 @@ const Sidebar = () => {
             </svg>
             Parties
           </li>
-          <li className="text-base font-normal my-3">
+          <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20px"
@@ -249,7 +249,7 @@ const Sidebar = () => {
         <h6 className=" text-base font-bold">GENRAL</h6>
         <ul className="mt-5">
           <Link href={`/`}>
-            <li className="text-base font-normal my-3">
+            <li className="text-base font-normal my-3 cursor-pointer hover:text-white transition-colors duration-500">
               <svg
                 width="20px"
                 height="20px"
@@ -287,7 +287,7 @@ const Sidebar = () => {
               Settings
             </li>
           </Link>
-          <li className="text-base font-bold mt-3">
+          <li className="text-base font-bold mt-3 cursor-pointer hover:text-white transition-colors duration-500">
             <svg
               width="20px"
               height="20px"

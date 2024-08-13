@@ -20,17 +20,42 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Suspense fallback={<div className="grid grid-cols-3 gap-6 p-10">
-          <Skeleton height={100}  baseColor="#898996" count={20} highlightColor="#898996"/>
-          <Skeleton height={100} baseColor="#898996"  count={20} highlightColor="#898996"/>
-          <Skeleton height={100} baseColor="#898996" count={20} highlightColor="#898996"/>
-        </div>}>
-          <Sidebar />
-          {children}
-          <SearchSide
-            popularMoviesData={popularMoviesData}
-            topRatedMoviesData={topRatedMoviesData}
-          />
+        <Suspense
+          fallback={
+            <div className="grid grid-cols-3 gap-6 p-10">
+              <Skeleton
+                height={100}
+                baseColor="#898996"
+                count={20}
+                highlightColor="#898996"
+              />
+              <Skeleton
+                height={100}
+                baseColor="#898996"
+                count={20}
+                highlightColor="#898996"
+              />
+              <Skeleton
+                height={100}
+                baseColor="#898996"
+                count={20}
+                highlightColor="#898996"
+              />
+            </div>
+          }
+        >
+          <div className="grid grid-cols-12 ">
+            <div className="col-span-2">
+              <Sidebar />
+            </div>
+            <div className="col-span-7 px-6 ml-10 ">{children}</div>
+            <div className="col-span-3">
+              <SearchSide
+                popularMoviesData={popularMoviesData}
+                topRatedMoviesData={topRatedMoviesData}
+              />
+            </div>
+          </div>
         </Suspense>
       </body>
     </html>
