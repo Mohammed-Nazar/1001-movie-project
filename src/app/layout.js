@@ -3,7 +3,9 @@ import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import SearchSide from "@/components/SearchSide/SearchSide";
 import { popularMovies, topRatedMovies } from "@/API/mainApi";
-
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,9 +20,14 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Sidebar />
-        {children}
-        <SearchSide popularMoviesData={popularMoviesData} topRatedMoviesData={topRatedMoviesData}/>
+        <Suspense fallback={<Skeleton count={20} />}>
+          <Sidebar />
+          {children}
+          <SearchSide
+            popularMoviesData={popularMoviesData}
+            topRatedMoviesData={topRatedMoviesData}
+          />
+        </Suspense>
       </body>
     </html>
   );
