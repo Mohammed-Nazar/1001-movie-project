@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import SmallCard from "../SmallCrad/SmallCrad";
 import { useRouter, useSearchParams } from "next/navigation";
-import { set } from "mongoose";
 
 const SearchSide = ({ topRatedMoviesData, popularMoviesData }) => {
     const [searchValue, setSearchValue] = useState("");
