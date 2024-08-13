@@ -20,7 +20,11 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Suspense fallback={<Skeleton count={50} highlightColor="#898996"/>}>
+        <Suspense fallback={<div className="grid grid-cols-3">
+          <Skeleton height={100}  baseColor="#898996" count={20} highlightColor="#898996"/>
+          <Skeleton height={100} baseColor="#898996"  count={20} highlightColor="#898996"/>
+          <Skeleton height={100} baseColor="#898996" count={20} highlightColor="#898996"/>
+        </div>}>
           <Sidebar />
           {children}
           <SearchSide
