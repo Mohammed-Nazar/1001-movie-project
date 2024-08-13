@@ -22,7 +22,7 @@ export default function MainSlider({ data, genres }) {
   return (
     <Carousel
       plugins={[plugin.current]}
-      className=" max-w-screen-sm max-h-[9rem] "
+      className=" max-h-[9rem] "
       onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
@@ -34,7 +34,7 @@ export default function MainSlider({ data, genres }) {
                 <CardContent className=" rounded-lg flex p-0 items-center justify-center">
                   <div className="w-full relative h-">
                     <img
-                      className=" rounded-2xl w-full h-fit"
+                      className=" rounded-2xl  h-fit object-cover"
                       src={src + e.backdrop_path}
                     />
                     <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black  to-transparent rounded-2xl"></div>

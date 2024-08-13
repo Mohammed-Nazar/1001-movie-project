@@ -5,15 +5,15 @@ const Card = ({ movie }) => {
   const src = "https://image.tmdb.org/t/p/original";
 
   return (
-    <div className="relative min-w-72 max-w-72">
+    <div className="relative min-w-36 md:max-w-36 ">
       <img
-        className="min-w-72 max-w-72 rounded-xl"
+        className="min-w-36 md:max-w-36 rounded-xl"
         src={src + movie.poster_path}
       />
       <div className="absolute bottom-0 left-0 w-full h-2/3 bg-gradient-to-t from-black  to-transparent rounded-xl"></div>
       <div className="absolute bottom-4 left-2 ">
         <Link href={`/${movie.id}`}>
-          <h1 className="text-white text-lg font-bold font-mono backdrop-blur-[1.2px] px-3 py-2 rounded-xl">
+          <h1 className="text-white text-sm font-bold font-mono backdrop-blur-[1.2px] px-3 py-2 rounded-xl">
             {movie.title}
           </h1>
         </Link>

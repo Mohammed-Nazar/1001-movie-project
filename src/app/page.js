@@ -62,7 +62,7 @@ export default async function Home({ searchParams }) {
   return (
     <div className="flex flex-col justify-center">
       <Main data={data} genres={genres} />
-      <div className="ml-72 mt-60 grid grid-cols-2 w-6/12 gap-y-5 gap-2 ">
+      <div className="ml-[23%] mt-[22%] grid grid-cols-4 w-6/12 gap-y-5 gap-2 ">
         {movies.map((movie) => {
           return <Card key={movie.id} movie={movie} genres={genres} />;
         })}
