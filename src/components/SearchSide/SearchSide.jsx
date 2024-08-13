@@ -20,7 +20,7 @@ const SearchSide = ({ topRatedMoviesData, popularMoviesData }) => {
     searchParam ? setSearchValue(searchParam) : setSearchValue("");
   }, [])
   return (
-    <aside className="fixed bottom-0 top-0 right-0 pt-10  border-l-[1px] border-l-[#898996] w-[25%] pl-10">
+    <aside className="fixed bottom-0 top-0 right-0 pt-10  border-l-[0.1px] border-l-[#898996] w-[25%] pl-10">
       <Input
       value={searchValue}
         onChange={handleSearch}
