@@ -38,7 +38,7 @@ export default async function Home({ searchParams }) {
   ];
 
   // Pagination logic
-  const moviesPerPage = 10;
+  const moviesPerPage = 12;
   const totalMovies = allMovies.length;
   const totalPages = Math.ceil(totalMovies / moviesPerPage);
 
